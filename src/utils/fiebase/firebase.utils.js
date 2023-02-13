@@ -1,11 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { 
-    getAuth, 
-    signInWithPopup, 
-    signInWithRedirect, 
-    GoogleAuthProvider, 
-} from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyD3YicZwkP4yyDQ33j4OLZUjJqXclz2IfQ",
@@ -20,19 +16,19 @@ const firebaseConfig = {
   const firebaseApp = initializeApp(firebaseConfig);
 
 
-  /* --- sign ing with GOOGLE Popup --- */
+  /* --- sign-in with GOOGLE Popup --- */
   const provider = new GoogleAuthProvider()
   provider.setCustomParameters({ prompt: 'select_account'});
 
   export const auth = getAuth();
   export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
-
   /* -- Initialize data-base -- */
   export const db = getFirestore();
 
   /* --- creating user document in users collection --- */
-  export const createUserDocumentFromAuth = async (userAuth) => {
+  export const createUserDocumentFromAuth = async (userAuth, additionalInformation={}) => {
+    if(!userAuth) return;  //protect our code
     const userDocRef = doc(db, 'users', userAuth.uid);
     console.log(userDocRef);
 
@@ -47,7 +43,8 @@ const firebaseConfig = {
             await setDoc(userDocRef, { // setDoc with display name, email, and date
                 displayName,
                 email,
-                createdAt
+                createdAt,
+                ...additionalInformation
             });
         } catch (error) {
             console.log("Error creating the user", error.message);
@@ -56,4 +53,10 @@ const firebaseConfig = {
 
     return userDocRef;
 
+  }
+
+  /* --- create Auth User with email and password --- */
+  export const createAtuhUserWithEmailAndPassword = async (email, password) => {
+    if(!email || !password) return; //protect our code - if firebase changes system, for example change the way of createing data-base
+    return await createUserWithEmailAndPassword(auth, email, password);
   }
