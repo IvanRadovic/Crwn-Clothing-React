@@ -1,9 +1,9 @@
-import { signInWithGooglePopup } from "../../utils/fiebase/firebase.utils";
+import { signInWithGooglePopup, createUserDocumentFromAuth } from "../../utils/fiebase/firebase.utils";
 
 const SignIn = () => {
     const logGoogleUser = async () => {
-      const response = await signInWithGooglePopup();
-      console.log(response);
+      const { user } = await signInWithGooglePopup();
+      const userDocRef = await createUserDocumentFromAuth(user);
     }
   return(
     <>
