@@ -1,9 +1,12 @@
 import { signInAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInWithGooglePopup } from "../../utils/fiebase/firebase.utils";
+
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import { UserContext } from "../../context/user.context";
+
 import "./sign-in.style.scss";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 
 const defaultFormFields = { //we make default fields for all inputs
@@ -16,21 +19,24 @@ const SignInForm = () => {
     const [ formFields, setFormFields] = useState(defaultFormFields); // set formFields to take defaultFormFields
     const { email, password } = formFields;
 
+    const {setCurrentUser} = useContext(UserContext);
+
     const resetFormFields = () => {
       setFormFields(defaultFormFields);
     }
 
     const SignInWithGoogle = async () => {
       const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+      await createUserDocumentFromAuth(user);
     };
 
     const handlerSubmit = async (event) => {
         event.preventDefault(); 
 
         try {
-            const response = await signInAuthUserWithEmailAndPassword(email, password);
+            const { user } = await signInAuthUserWithEmailAndPassword(email, password);
             // console.log(response); control uid -- access token
+            setCurrentUser(user);
             resetFormFields();
         } catch (error) {
             switch(error.code){

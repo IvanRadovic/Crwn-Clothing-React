@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { 
+  getAuth, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword,
+  signOut
+} from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"
 
 
@@ -30,10 +37,10 @@ const firebaseConfig = {
   export const createUserDocumentFromAuth = async (userAuth, additionalInformation={}) => {
     if(!userAuth) return;  //protect our code
     const userDocRef = doc(db, 'users', userAuth.uid);
-    console.log(userDocRef);
+    // console.log(userDocRef);
 
     const userSnapshot = await getDoc(userDocRef); // took data from user and we make path to the data-base
-    console.log(userSnapshot);
+    // console.log(userSnapshot);
 
     if(!userSnapshot.exists()) { 
         const { displayName, email } = userAuth;
@@ -55,14 +62,18 @@ const firebaseConfig = {
 
   }
 
-  /* --- create Auth User with email and password --- */
+  /* ------ create Auth User with email and password ------ */
   export const createAtuhUserWithEmailAndPassword = async (email, password) => {
     if(!email || !password) return; //protect our code - if firebase changes system, for example change the way of createing data-base
     return await createUserWithEmailAndPassword(auth, email, password);
   }
 
-  /* --- sign in User with email and password --- */
+  /* ----- sign in User with email and password ------- */
   export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if(!email || !password) return;
     return await signInWithEmailAndPassword(auth, email, password);
   }
+
+
+  /*  ----- sing out User ------ */
+  export const signOutUser = async () => await signOut(auth);
