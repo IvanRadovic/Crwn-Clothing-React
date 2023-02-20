@@ -4,7 +4,7 @@ import Button from "../button/button.component";
 import { UserContext } from "../../context/user.context";
 import "./sign-up.style.scss";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 
 const defaultFormFields = { //we make default fields for all inputs
@@ -18,8 +18,6 @@ const SignUpForm = () => {
 
     const [ formFields, setFormFields] = useState(defaultFormFields); // set formFields to take defaultFormFields
     const { displayName, email, password, confirmPassword } = formFields;
-
-    const { setCurrentUser } = useContext(UserContext); 
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -35,7 +33,6 @@ const SignUpForm = () => {
         try {
             const { user } = await createAtuhUserWithEmailAndPassword(email, password);
             await createUserDocumentFromAuth(user, { displayName });
-            setCurrentUser(user);
             resetFormFields();
         } catch (error) {
             console.log("user creation encoutered an error", error);

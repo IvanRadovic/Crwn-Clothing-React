@@ -2,11 +2,10 @@ import { signInAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInW
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import { UserContext } from "../../context/user.context";
 
 import "./sign-in.style.scss";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 
 const defaultFormFields = { //we make default fields for all inputs
@@ -19,15 +18,12 @@ const SignInForm = () => {
     const [ formFields, setFormFields] = useState(defaultFormFields); // set formFields to take defaultFormFields
     const { email, password } = formFields;
 
-    const {setCurrentUser} = useContext(UserContext);
-
     const resetFormFields = () => {
       setFormFields(defaultFormFields);
     }
 
     const SignInWithGoogle = async () => {
-      const { user } = await signInWithGooglePopup();
-      await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     };
 
     const handlerSubmit = async (event) => {
@@ -36,7 +32,6 @@ const SignInForm = () => {
         try {
             const { user } = await signInAuthUserWithEmailAndPassword(email, password);
             // console.log(response); control uid -- access token
-            setCurrentUser(user);
             resetFormFields();
         } catch (error) {
             switch(error.code){
