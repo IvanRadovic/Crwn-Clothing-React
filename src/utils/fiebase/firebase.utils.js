@@ -6,9 +6,10 @@ import {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"
+
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs } from "firebase/firestore"
 
 
 const firebaseConfig = {
@@ -33,6 +34,39 @@ const firebaseConfig = {
 
   /* -- Initialize data-base -- */
   export const db = getFirestore();
+
+
+  /* ---- Adding collection (collectionReference) ---- */
+  export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(db, collectionKey);
+    const batch = writeBatch(db); //batch
+
+    // for each object to set a batch 
+    objectsToAdd.forEach(object => {
+      const docRef = doc(collectionRef, object.title.toLowerCase()); // creating doc in collection which is in db - key is title
+      batch.set(docRef, object);
+    });
+
+    await batch.commit(); // firing it off
+  } 
+
+
+  /* -------- Getting Data from FireBase ------- */
+  export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef);
+
+    const querySnapshot = await getDocs(q); // fetch all snapshots that we want
+    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+      const { title, items } = docSnapshot.data(); 
+      acc[title.toLowerCase()] = items;
+      return acc;
+    },{})
+
+    return categoryMap;
+  }
+
+
 
   /* --- creating user document in users collection --- */
   export const createUserDocumentFromAuth = async (userAuth, additionalInformation={}) => {
