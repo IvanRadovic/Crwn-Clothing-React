@@ -10,7 +10,10 @@ import { signOutUser } from "../../utils/fiebase/firebase.utils";
 import { UserContext } from '../../context/user.context';
 import { CartContext } from '../../context/cart.context';
 
-import './navigation.styles.scss';
+/* --- Styled Components --- */
+import { NavigationContainer, LogoContainer, NavLinks, NavLink } from "./navigation.styles";
+
+
 
 const Navigation = () => {
     const { currentUser } = useContext(UserContext);
@@ -18,24 +21,24 @@ const Navigation = () => {
 
     return (
       <Fragment>
-          <div className='navigation'>
-                <Link className='logo-container' to='/'>
+          <NavigationContainer>
+                <LogoContainer to='/'>
                     <CrwnLogo className='logo' />
-                </Link>
-                <div className='nav-links-container'>
-                    <Link className='nav-link' to='/shop'>
+                </LogoContainer>
+                <NavLinks>
+                    <NavLink to='/shop'>
                         SHOP
-                    </Link>
+                    </NavLink>
                     {
-                        currentUser ? (<span className='nav-link' onClick={signOutUser}>SIGN-OUT</span>) : 
-                            (<Link className='nav-link' to='/auth'>
+                        currentUser ? (<NavLink as='span' onClick={signOutUser}>SIGN-OUT</NavLink>) : 
+                            (<NavLink to='/auth'>
                                 SIGN-IN
-                            </Link>)
+                            </NavLink>)
                     }
                     <CartIcon />
-                </div>
+                </NavLinks>
                     {isCartOpen && <CartDropDown />}
-          </div>
+          </NavigationContainer>
           <Outlet/>
       </Fragment>
     )

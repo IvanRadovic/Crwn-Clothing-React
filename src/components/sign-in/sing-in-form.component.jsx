@@ -3,7 +3,8 @@ import { signInAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInW
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-import "./sign-in.style.scss";
+/* --- Styled Components --- */
+import { SignInContainer, ButtonsContainer } from "./sign-in.style";
 
 import { useState } from "react";
 
@@ -53,7 +54,7 @@ const SignInForm = () => {
     }
 
   return(
-    <div className="sign-up-container">
+    <SignInContainer>
         <h2>Already have an account?</h2>
         <span>Sign in with your email and password</span>
         <form onSubmit={handlerSubmit}>
@@ -73,12 +74,12 @@ const SignInForm = () => {
                 name="password" 
                 value={password} 
             />
-            <div className="buttons-container">
+            <ButtonsContainer>
                 <Button type="submit"> Sign In </Button>
                 <Button type='button' buttonType={'google'} onClick={SignInWithGoogle}>Google sign in</Button>
-            </div>
+            </ButtonsContainer>
         </form>
-    </div>
+    </SignInContainer>
   )
 }
 

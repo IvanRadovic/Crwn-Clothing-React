@@ -6,7 +6,8 @@ import { CartContext } from "../../context/cart.context";
 import Button from "../button/button.component"
 import CartItem from "../cart-item/cart-item.component";
 
-import './cart-dropdown.style.scss';
+/* --- Styled Components ---- */
+import { CartDropdownContainer, CartItems } from "./cart-dropdown.style";
 
 const CartDropDown = () => {
 
@@ -18,14 +19,14 @@ const CartDropDown = () => {
   }
 
   return (
-    <div className='cart-dropdown-container'>
-        <div className="cart-items">
+    <CartDropdownContainer>
+        <CartItems>
             { cartItems.map ((item) => (
               <CartItem key={item.id} cartItem={item} />
             ))}
-        </div>
+        </CartItems>
         <Button onClick ={goToCheckoutHandler}>CHECKOUT</Button>
-    </div>
+    </CartDropdownContainer>
   )
 }
 
