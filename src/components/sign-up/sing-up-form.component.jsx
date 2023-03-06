@@ -1,6 +1,6 @@
 import { createAtuhUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/fiebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import { UserContext } from "../../context/user.context";
 
 /* ----- Styled Components ---- */

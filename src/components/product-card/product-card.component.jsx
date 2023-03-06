@@ -5,7 +5,7 @@ import { CartContext } from '../../context/cart.context';
 
 /* --- Styled Components ---- */
 import { ProductCardContainer, FooterProduct, FooterName, FooterPrice } from './product-card.style';
-import Button from '../button/button.component'
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component'
 
 const ProductCard = ({ product }) => {
     const { name, price, imageUrl } = product;
@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
                 <FooterName>{name}</FooterName>
                 <FooterPrice>{price}</FooterPrice>
             </FooterProduct>
-            <Button buttonType='inverted' onClick={addProductToCart}>Add to card</Button>
+            <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addProductToCart}>Add to card</Button>
         </ProductCardContainer>
     )
 }

@@ -1,7 +1,7 @@
 import { signInAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInWithGooglePopup } from "../../utils/fiebase/firebase.utils";
 
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 /* --- Styled Components --- */
 import { SignInContainer, ButtonsContainer } from "./sign-in.style";
@@ -76,7 +76,7 @@ const SignInForm = () => {
             />
             <ButtonsContainer>
                 <Button type="submit"> Sign In </Button>
-                <Button type='button' buttonType={'google'} onClick={SignInWithGoogle}>Google sign in</Button>
+                <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google} onClick={SignInWithGoogle}>Google sign in</Button>
             </ButtonsContainer>
         </form>
     </SignInContainer>
