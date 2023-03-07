@@ -50,18 +50,5 @@ export const FooterName = styled.span`
 
 export const FooterPrice = styled.span`
       width: 10%;
-`
-
-  //   .footer {
-      
-  
-  //     .name {
-      
-  //     }
-  
-  //     .price {
-  //       width: 10%;
-  //     }
-  //   }
-  // }
+`;
   

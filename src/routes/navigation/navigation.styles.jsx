@@ -28,6 +28,19 @@ export const NavLinks = styled.div`
 export const NavLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer; 
+
+  @media(max-width:475px){
+    padding:10px;
+  };
+
+  @media(max-width:390px){
+    font-size:12px;
+  };
+
+  @media(max-width:345px){
+    padding:5px;
+  };
+
 `
 
 // .navigation {

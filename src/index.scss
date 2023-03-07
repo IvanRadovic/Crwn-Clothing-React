@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 20px 40px;
   font-family: "Open Sans, sans-serif";
+  background-color: #bababab5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -19,4 +20,10 @@ a {
 
 *{
   box-sizing: border-box;
+}
+
+@media(max-width:1024px){
+  body{
+    padding: 10px 10px;
+  }
 }

@@ -32,6 +32,29 @@
         font-weight: lighter;
         font-size: 16px;
       }
+
+      @media(max-width:1024px){
+        width:200px !important;
+
+        h2{
+          font-size:27px;
+        }
+
+      };
+
+      @media(max-width:575px){
+        h2 {
+          font-size:22px;
+        }
+
+        p{
+          font-size: 14px;
+        }
+      };
+
+      @media(max-width:475px){
+        height:80px;
+      }
 `;
   
     export const DirectoryItemContainer = styled.div`
