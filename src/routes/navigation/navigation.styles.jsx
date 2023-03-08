@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-    background-color:#1a181873;
+    background: linear-gradient(126deg, rgb(19 19 19) 40%, rgb(25 34 54 / 96%) 97%);
     border-radius:10px;
 `;
 
