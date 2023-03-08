@@ -60,7 +60,7 @@
   
     export const DirectoryItemContainer = styled.div`
       min-width: 30%;
-      height: 240px;
+      height: 350px;
       flex: 1 1 auto;
       display: flex;
       align-items: center;
@@ -87,6 +87,10 @@
     
       &:last-child {
         margin-left: 7.5px;
+      }
+
+      @media(max-width:1024px){
+        height: 240px;
       }
     `;
 

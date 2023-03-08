@@ -42,4 +42,8 @@ export const CheckOutItemContainer = styled.div`
     padding-left: 12px;
     cursor: pointer;
   }
+
+  @media(max-width:475px){
+    margin:20px 0px;
+  }
 `;

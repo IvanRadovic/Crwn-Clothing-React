@@ -7,7 +7,11 @@ export const SignInContainer = styled.div`
 
     h2{
         margin-top: 10px 0;
-    }   
+    }
+
+    @media(max-width:1024px){
+        width:100%;
+    }
 `;
 
 export const ButtonsContainer = styled.div`

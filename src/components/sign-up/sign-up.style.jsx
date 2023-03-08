@@ -8,4 +8,8 @@ export const SignUpContainer = styled.div`
     h2{
         margin-top: 10px 0;
     }
+
+    @media(max-width:1024px){
+        width:100%;
+    }
 `

@@ -7,6 +7,10 @@ export const CheckOutContainer = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 50px auto 0;
+
+    @media(max-width:1024px){
+        width:95%
+    }
 `;
 
 export const CheckouHeader = styled.div`
