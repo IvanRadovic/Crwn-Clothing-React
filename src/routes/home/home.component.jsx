@@ -7,7 +7,7 @@ const Home = () => {
     <div>
         <Outlet />
         <Directory />
-        <Footer />
+        {/* <Footer /> */}
     </div>
   );
 }
